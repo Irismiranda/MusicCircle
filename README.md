@@ -38,7 +38,7 @@ The following technologies and frameworks are utilized in the MusicCircle projec
 
 ### 1. Live Chat
 
-MusicCircle offers a real-time live chat feature where users can connect and engage in conversations with each other.
+MusicCircle offers a real-time live chat feature where users can connect and engage in conversations with people who are listening to the same artist.
 
 ### 2. Inbox/Private Chat
 
