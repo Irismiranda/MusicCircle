@@ -288,7 +288,7 @@ export default function PlayerManager() {
                     repeatState: state.repeat_mode, 
                     isPaused: state.paused })
 
-                player.getVolume().then(volume => {
+                player?.getVolume().then(volume => {
                     let percentage = volume * 100
 
                     setPlayerState({ volumePercentage: percentage })

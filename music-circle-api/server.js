@@ -227,7 +227,7 @@ app.post('/api/:loggedUserId/toggle_follow/:currentUserId', async (req, res) => 
       .get()
 
       if(!notificationDocRef.empty){
-        const notificationDoc = notificationDocRef.docs[0]
+        const notificationDoc = notificationDocRef?.docs[0]
         notificationDoc.ref.delete()
       }
 
@@ -443,7 +443,7 @@ app.get('/api/track_post/:artist_id/:post_id', async (req, res) => {
 
 app.post('/api/posts_feed/:index', async (req, res) => {
   const { index } = req.params
-  const { user_ids } = req.body
+  const { user_ids, logged_user_id } = req.body
 
   console.log("user ids are", user_ids)
   
@@ -463,20 +463,17 @@ app.post('/api/posts_feed/:index', async (req, res) => {
 
       if (posts.length < limit) {
           const nonFollowedPostsQuery = admin.firestore().collection('posts')
-            .where('user_id', 'not-in', user_ids)
+            .where('user_id', 'not-in', [...user_ids, logged_user_id])
             .where('hide_post', '==', false)
             .orderBy('user_id')
             .limit(parseInt(limit, 10))
             .startAfter(parseInt((index - posts.length), 10))
 
           const nonFollowedSnapshot = await nonFollowedPostsQuery.get()
-          const nonFollowedUsers = nonFollowedSnapshot.docs.map(doc => doc.data())
-          const nonFollowedPosts = nonFollowedUsers
-          .map(user => user.posts)
-          .filter(posts => posts !== undefined && posts !== null)
+          const newPosts = nonFollowedSnapshot.docs.map(doc => doc.data())
 
-          if(nonFollowedPosts && (nonFollowedPosts?.length > 0)){
-            posts.push(...nonFollowedPosts)
+          if(newPosts && (newPosts?.length > 0)){
+            posts.push(...newPosts)
           }
       }
 
@@ -645,7 +642,7 @@ app.post('/api/toggle_like_post/:post_id', async (req, res) => {
       const notificationData = {
         id: uuidv4(),
         content_id: post.post_id,
-        poster_id: post.poster_id,
+        poster_id: post.user_id,
         user: logged_user_id,
         data_type: 'post',
         notification_type: 'like',
@@ -684,7 +681,7 @@ app.post('/api/:post_id/add_comment', async (req, res) => {
   const newCommentData = req.body
 
   newCommentData.comment_id = uuidv4()
-
+  console.log("ids are", newCommentData.poster_id, newCommentData.user_id)
   
   try{
     if(newCommentData.poster_id && newCommentData.poster_id !== newCommentData.user_id){
@@ -868,7 +865,7 @@ app.post('/api/:post_id/toggle_like_reply/:comment_id/:reply_id', async (req, re
       await replyDocRef.update({ likes: updatedLikes })
       res.status(200).send("Like toggled successfully")
 
-      const userNotificationsRef = admin.firestore().collection(`user/${replyDoc.user_id}/`)
+      const userNotificationsRef = admin.firestore().doc(`user/${replyDoc.user_id}/`)
 
     if(replyDoc?.likes?.includes(logged_user_id)){
       const currentNotification = await userNotificationsRef

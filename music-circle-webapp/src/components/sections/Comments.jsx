@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect } from "react"
 import useStore from "../../store"
 import { Comment } from "../"
 
@@ -112,6 +112,7 @@ export default function Comments(props) {
                 .map(comment => {
                         return (
                             <Comment 
+                            key={comment.comment_id}
                             setPosts={setPosts}
                             post={post}
                             comment={comment}

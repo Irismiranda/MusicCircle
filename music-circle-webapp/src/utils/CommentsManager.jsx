@@ -115,7 +115,6 @@ export default function CommentsManager(props){
         
         if(postParam === post.post_id){
             setIsPostVisible(true)
-            !commentParam && setSearchParams({})
         }
     }, [params])
 
@@ -233,7 +232,7 @@ export default function CommentsManager(props){
                     className="relative full_width"
                     style={{ marginTop: "10px" }}>
                         {replyTo && 
-                        <h4
+                        <h5
                         style={{ 
                             display: "flex",
                             justifyContent: "space-between",
@@ -242,7 +241,7 @@ export default function CommentsManager(props){
                             {`Replying to ${replyTo.user_handle}`} 
                         <span 
                         className="underline_text"
-                        onClick={() => setReplyTo(null)}>Cancel</span></h4>}
+                        onClick={() => setReplyTo(null)}>Cancel</span></h5>}
                         <div 
                         className="relative">
                             <textarea

@@ -83,16 +83,6 @@ const Reply = React.memo((props) => {
         }
     }, [reply])
 
-    useEffect(() => {
-        const replyParam = params?.get('reply')
-        if(replyParam === reply.reply_id){
-            const currentReply = document.getElementById(replyParam)
-            currentReply.scrollIntoView({ behavior: "smooth", block: "end" })
-            setSearchParams({})
-        }
-
-    }, [params])
-
     return (
         reply &&
         <section 
@@ -139,20 +129,20 @@ const Reply = React.memo((props) => {
                 </div>
             </div>
             <div className="flex">
-                <h4>{new Date(reply?.timestamp * 1000).toLocaleString()}</h4>
-                <h4>{reply.likes?.length || 0} Likes</h4>
+                <h5>{new Date(reply?.timestamp * 1000).toLocaleString()}</h5>
+                <h5>{reply.likes?.length || 0} Likes</h5>
                 {(user?.id !== loggedUser.id) && 
-                <h4 
+                <h5 
                 className="pointer"
                 onClick={() => replyToComment(user?.id, user?.userHandle, currentComment?.comment_id)}>
                     Reply
-                </h4>}
+                </h5>}
                 {(user?.id === loggedUser.id) &&
-                <h4 
+                <h5 
                 className="pointer"
                 onClick={() => deleteReply(postId, currentComment?.comment_id, reply.reply_id)}>
                     Delete Comment
-                </h4>}
+                </h5>}
             </div>
         </section>
         )

@@ -153,10 +153,12 @@ const Comment = React.memo((props) => {
     useEffect(() => {
         const commentParam = params?.get('comment')
         const replyParam = params?.get('reply')
-        
+       
         if(commentParam === comment.comment_id){
             const currentComment = document.getElementById(commentParam)
-            currentComment.scrollIntoView({ behavior: "smooth", block: "end" })
+
+            console.log("currentComment", currentComment)
+            currentComment.scrollIntoView({ behavior: "smooth", block: "center" })
             !replyParam && setSearchParams({})
         }
     }, [params])

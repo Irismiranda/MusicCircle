@@ -17,7 +17,7 @@ export default function NotificationsManager(){
     const navigate = useNavigate()
 
     function handleSelectedNotification(){
-        const {poster_id, content_id, comment_id, reply_id, notification_type} = selectedNotification
+        const {user, poster_id, content_id, comment_id, reply_id, notification_type} = selectedNotification
         console.log(selectedNotification)
         if(notification_type === 'comment'){
             if(poster_id){

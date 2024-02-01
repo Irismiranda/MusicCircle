@@ -13,7 +13,7 @@ export default function Feed(){
 
     async function getPosts(index, user_ids){
         setIsLoading(true)
-        const postsArr = await Axios.post(`api/posts_feed/${index}`, {user_ids: user_ids})
+        const postsArr = await Axios.post(`api/posts_feed/${index}`, {user_ids: user_ids, logged_user_id: loggedUser.id})
             
         if(postsArr.data?.posts?.length > 0){
             setPosts(postsArr.data.posts)

@@ -160,6 +160,7 @@ export default function SideMenu(){
             style={{ 
                 zIndex: "3", 
                 left: "115px", 
+                overflow: "hidden auto",
                 top: activeMenu === "more" ? "" : "0",
                 }}>
                 {activeMenu === "search" && <SearchMenu />}

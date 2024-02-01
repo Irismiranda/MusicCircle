@@ -37,8 +37,11 @@ export default function Welcome() {
                 style={{ zIndex: "1", left: "-104%", top: "27vh"  }}/>
 
             </div>
-            <div>
-
+            <div className='text'>
+                <h1>Find your tribe.</h1>
+                <h2>Live chat with users who are listening to the same artist.</h2>
+                <h2>Share your music taste with your followers.</h2>
+                <h2>Explore new music and have fun!</h2>
             </div>
             <button onClick={login}>login with Spotify</button>      
         </section>
