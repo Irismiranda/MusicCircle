@@ -79,31 +79,42 @@ cd musiccircle-api
 ```
 
 ## 2. Create Spotify Developer Account
-   - Visit Spotify Developer Dashboard.
-   - Create a new app for SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET.
-   - On the Spotify Developer Dashboard, navigate to your app.
-   - Under "Settings," find the "Edit Settings" button.
-   - In the "Redirect URIs" section, set your Redirect URI.
-   - Manage the Spotify users you want to allow access to your app in development mode. Note that you can add a maximum of 25 users in development mode. If you plan to onboard more users, consider submitting a quota extension request.
-     
+   1. Visit the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard).
+   2. Create a new app and obtain your SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET from the settings menu.
+   3. Replace `XXX` in the .env.example file with your new Spotify keys.
+   4. Under "Settings," click "Edit," and in the "Redirect URIs" section, set your Redirect URI as http://localhost:4000/auth/callback.
+   5. Manage the Spotify users you want to allow access to your app in development mode. Note that you need to add your own account, and can add a total maximum of 25 users in development mode.
+
 ## 3. Create Firebase Project
-   - Visit Firebase Console.
-   - Create a new project, enable Firebase Authentication, and Firestore.
-     
+   1. Visit the [Firebase Console](https://console.firebase.google.com).
+   2. Create a new project and a Cloud Firestore database.
+   3. On your home page, find the "Add Firebase to your project" menu and click "web."
+   4. Name and register the app, and follow the instructions to install the Firebase npm package.
+   5. Replace `XXXX` in the .env.example file with your new keys and data.
+
 ## 4. Create Firebase Service Account
-   - Generate a new private key in JSON format.
-   - Replace {XXXX} in FIREBASE_SERVICE_ACCOUNT with the private key.
+   1. Under project configuration, click on service accounts (Node.js).
+   2. Generate a new private key.
+   3. Open the JSON file and copy your new private key.
+   4. Replace `{XXXX}` in .env.example under FIREBASE_SERVICE_ACCOUNT with your private key.
+
+## 5. Get Emoji API Keys
+   1. Go to [emoji-api.com](https://emoji-api.com).
+   2. Create a key and replace `XXXX` under EMOJI_API_KEY with your new key.
+
+## 6. Edit .env File
+   - Edit the .env.example file name to .env
+
      
-## 5. Edit .env File
-   - Open .env in the root.
-   - Replace XXXX with your values for keys (Spotify, Firebase, Emoji API).
+##6. Edit .env File
+   - Edit the .env.example file name to .env
    
-## 6. Install Dependencies
+## 7. Install Dependencies
    ```bash
    npm install
    ```
      
-## 7. Run the Application
+## 8. Run the Application
    
    ```bash
    npm start
