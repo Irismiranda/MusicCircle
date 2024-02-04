@@ -103,11 +103,7 @@ cd musiccircle-api
    2. Create a key and replace `XXXX` under EMOJI_API_KEY with your new key.
 
 ## 6. Edit .env File
-   - Edit the .env.example file name to .env
-
-     
-##6. Edit .env File
-   - Edit the .env.example file name to .env
+   - Change the .env.example file name to .env
    
 ## 7. Install Dependencies
    ```bash
