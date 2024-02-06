@@ -95,7 +95,7 @@ cd musiccircle-api
 ## 4. Create Firebase Service Account
    1. Under project configuration, click on service accounts (Node.js).
    2. Generate a new private key.
-   3. Open the JSON file and copy your new private key.
+   3. Open the downloaded JSON file and copy your new private key.
    4. Replace `{XXXX}` in .env.example under FIREBASE_SERVICE_ACCOUNT with your private key.
 
 ## 5. Get Emoji API Keys
@@ -108,14 +108,38 @@ cd musiccircle-api
 ## 7. Install Dependencies
    ```bash
    npm install
-   ```
-     
-## 8. Run the Application
-   
+   ```  
+## 8. Start the Application (Server Side)
+
+To launch the application, follow these steps:
+
+1. Open a terminal.
+2. Navigate to the 'music-circle-api' folder using the command:
+   ```bash
+   cd music-circle-api
+3. Run the following command to start the application:
    ```bash
    npm start
-   ```
-   
+4. Run the following command to run the application in development mode:
+   ```bash
+   npm run dev
+
+## 9. Start the Application (Client Side)
+
+1. Open a terminal (if your terminal is still inside music-circle-api, run the command ..cd to go back to the root folder).
+2. Navigate to the 'music-circle-webapp' folder using the command:
+
+   ```bash
+   cd music-circle-webapp
+
+3. Run the following command to start the application:
+   ```bash
+   npm start
+
+4. Run the following command to run the application in development mode:
+   ```bash
+   npm run dev
+
 The app will be available at [http://localhost:5173](http://localhost:5173) (client)
 
 ## Usage
