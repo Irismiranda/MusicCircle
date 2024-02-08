@@ -78,38 +78,38 @@ git clone https://github.com/your-username/musiccircle-api.git
 cd musiccircle-api
 ```
 
-## 2. Create Spotify Developer Account
+### 2. Create Spotify Developer Account
    1. Visit the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard).
    2. Create a new app and obtain your SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET from the settings menu.
    3. Replace `XXX` in the .env.example file with your new Spotify keys.
    4. Under "Settings," click "Edit," and in the "Redirect URIs" section, set your Redirect URI as http://localhost:4000/auth/callback.
    5. Manage the Spotify users you want to allow access to your app in development mode. Note that you need to add your own account, and can add a total maximum of 25 users in development mode.
 
-## 3. Create Firebase Project
+### 3. Create Firebase Project
    1. Visit the [Firebase Console](https://console.firebase.google.com).
    2. Create a new project and a Cloud Firestore database.
    3. On your home page, find the "Add Firebase to your project" menu and click "web."
    4. Name and register the app, and follow the instructions to install the Firebase npm package.
    5. Replace `XXXX` in the .env.example file with your new keys and data.
 
-## 4. Create Firebase Service Account
+### 4. Create Firebase Service Account
    1. Under project configuration, click on service accounts (Node.js).
    2. Generate a new private key.
    3. Open the downloaded JSON file and copy your new private key.
    4. Replace `{XXXX}` in .env.example under FIREBASE_SERVICE_ACCOUNT with your private key.
 
-## 5. Get Emoji API Keys
+### 5. Get Emoji API Keys
    1. Go to [emoji-api.com](https://emoji-api.com).
    2. Create a key and replace `XXXX` under EMOJI_API_KEY with your new key.
 
-## 6. Edit .env File
+### 6. Edit .env File
    - Change the .env.example file name to .env
    
-## 7. Install Dependencies
+### 7. Install Dependencies
    ```bash
    npm install
    ```  
-## 8. Start the Application (Server Side)
+### 8. Start the Application (Server Side)
 
 To launch the application, follow these steps:
 
@@ -124,7 +124,7 @@ To launch the application, follow these steps:
    ```bash
    npm run dev
 
-## 9. Start the Application (Client Side)
+### 9. Start the Application (Client Side)
 
 1. Open a terminal (if your terminal is still inside music-circle-api, run the command ..cd to go back to the root folder).
 2. Navigate to the 'music-circle-webapp' folder using the command:
