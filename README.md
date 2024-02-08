@@ -132,11 +132,7 @@ To launch the application, follow these steps:
    ```bash
    cd music-circle-webapp
 
-3. Run the following command to start the application:
-   ```bash
-   npm start
-
-4. Run the following command to run the application in development mode:
+3. Run the following command to run the application in development mode:
    ```bash
    npm run dev
 
