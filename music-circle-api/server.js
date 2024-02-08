@@ -339,18 +339,12 @@ app.post('/api/user/data/:category/hide_item', async (req, res)  => {
   const { category } = req.params
   const userDocRef = admin.firestore().doc(`user/${userId}`)
 
-  console.log("params are", req.params, "body is", req.body)
-
   try {
       const doc = await userDocRef.get()
       if (doc.exists) {
           const userData = doc.data()
 
-          console.log("user data is", userData)
-
           const topList = userData[category]
-
-          console.log("top list is", topList)
 
           const updatedItems = topList.items.map(item => item.id === itemId ? {...item, isVisible: !item.isVisible || false } : item)
           const updatedList = {...topList, items: updatedItems}
@@ -444,8 +438,6 @@ app.get('/api/track_post/:artist_id/:post_id', async (req, res) => {
 app.post('/api/posts_feed/:index', async (req, res) => {
   const { index } = req.params
   const { user_ids, logged_user_id } = req.body
-
-  console.log("user ids are", user_ids)
   
   const limit = 10
 
@@ -458,8 +450,6 @@ app.post('/api/posts_feed/:index', async (req, res) => {
 
       const snapshot = await postsQuery.get()
       const posts = snapshot.docs.map(doc => doc.data())
-
-      console.log("feed posts are", posts)
 
       if (posts.length < limit) {
           const nonFollowedPostsQuery = admin.firestore().collection('posts')
@@ -681,7 +671,6 @@ app.post('/api/:post_id/add_comment', async (req, res) => {
   const newCommentData = req.body
 
   newCommentData.comment_id = uuidv4()
-  console.log("ids are", newCommentData.poster_id, newCommentData.user_id)
   
   try{
     if(newCommentData.poster_id && newCommentData.poster_id !== newCommentData.user_id){
@@ -929,7 +918,6 @@ await Promise.all(
 
       await chatDocRef.set({ user_ids: messageData.user_ids, chat_id: chat_id })
     } else {
-      console.log("Common documents are", commonDocs)
       chat_id = commonDocs[0].id
     }
 
@@ -1064,7 +1052,6 @@ admin.initializeApp({
 
 
 io.on('connection', (socket) => {
-  console.log('Client connected')
 
   //Notificarions
 
@@ -1111,11 +1098,9 @@ io.on('connection', (socket) => {
           .filter(change => change.type === 'added' || change.type === 'modified')
           .map(change => change.doc.data())
         if (isFirstSnapshot) {
-          console.log('loading comments', comments)
           io.to(post_id).emit('loadAllComments', comments)
           isFirstSnapshot = false
         } else{
-          console.log('loading new comment', comments)
           comments && io.to(post_id).emit('loadNewComment', comments)
         } 
       })
@@ -1144,11 +1129,9 @@ io.on('connection', (socket) => {
           .filter(change => change.type === 'added' || change.type === 'modified')
           .map(change => change.doc.data())
         if (isFirstSnapshot) {
-          console.log('loading replies', replies)
           io.to(post_id).emit(`loadAllReplies_${comment_id}`, replies)
           isFirstSnapshot = false
         } else{
-          console.log('loading new reply', replies)
           replies && io.to(post_id).emit(`loadNewReply_${comment_id}`, replies)
         } 
       })
@@ -1165,7 +1148,6 @@ io.on('connection', (socket) => {
 
   socket.on('connectToPrivateChat', async ({ chat_id }) => {
     socket.join(chat_id)
-    console.log("joined room", chat_id)
 
     let isFirstSnapshot = true
 
@@ -1240,13 +1222,10 @@ io.on('connection', (socket) => {
   
       if (existingChatQuery.size > 0) {
         currentChatId = existingChatQuery.docs[0].id
-        console.log('Found existing chat:', currentChatId)
       } else {
         const newChatId = `${id}_${uuidv4()}`
-        console.log('New chat id is:', newChatId)
         await chatCollectionRef.doc(newChatId).set({})
         currentChatId = newChatId
-        console.log('New chat created', currentChatId)
       }
   
       let isFirstSnapshot = true
@@ -1274,14 +1253,12 @@ io.on('connection', (socket) => {
   })
 
   socket.on('sendMessage', async ( newMessage ) => {
-    console.log('new message data is:', newMessage)
 
     const { messageId, id, chatId } = newMessage
     const messagesRef = admin.firestore().collection(`artists/${id}/chats/${chatId}/messages`).doc(messageId)
 
     try {
       await messagesRef.set(newMessage)
-      console.log('Message added to Firestore:', newMessage)
 
       const messagesSnapshot = await messagesRef.get()
       if (messagesSnapshot.size > 100) {

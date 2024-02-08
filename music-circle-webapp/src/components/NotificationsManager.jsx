@@ -18,7 +18,7 @@ export default function NotificationsManager(){
 
     function handleSelectedNotification(){
         const {user, poster_id, content_id, comment_id, reply_id, notification_type} = selectedNotification
-        console.log(selectedNotification)
+
         if(notification_type === 'comment'){
             if(poster_id){
                 navigate(`account/${poster_id}?post=${content_id}&&comment=${comment_id}`)

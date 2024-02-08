@@ -156,8 +156,7 @@ const Comment = React.memo((props) => {
        
         if(commentParam === comment.comment_id){
             const currentComment = document.getElementById(commentParam)
-
-            console.log("currentComment", currentComment)
+            
             currentComment.scrollIntoView({ behavior: "smooth", block: "center" })
             !replyParam && setSearchParams({})
         }

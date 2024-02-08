@@ -220,10 +220,6 @@
       
     }, [expiringTime])
 
-    useEffect(() => {
-      console.log("token expires in", expiringTime)
-    }, [expiringTime])
-
     useEffect(() => {  
       if(userTopTracks){
         const visibleItems = userTopTracks.items.filter(item => item.isVisible)
